@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Joke Teller</title>
+    <style>
+        @keyframes backgroundFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            background-size: 200% 200%;
+            animation: backgroundFlow 10s ease infinite;
+            color: #eaeaea;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            background-color: rgba(15, 52, 96, 0.85);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #e94560;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #d72638;
+        }
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #eaeaea;
+            cursor: pointer;
+        }
+        .twitter-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #eaeaea;
+            text-decoration: none;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Twitter Link -->
+    <a href="https://x.com/aijoke_?s=21" target="_blank" class="twitter-button">Follow us on Twitter</a>
+
+    <!-- Language Switcher -->
+    <div class="lang-switcher" onclick="switchLanguage()">EN | 中文</div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 id="title">Welcome to the AI Joke Teller!</h1>
+        <p id="joke">Press the button to hear a joke!</p>
+        <button onclick="tellJoke()">Get a Joke</button>
+    </div>
+
+    <script>
+        let language = 'en';
+
+        // Switch between English and Chinese
+        function switchLanguage() {
+            if (language === 'en') {
+                document.getElementById('title').innerText = '欢迎来到 AI 笑话机！';
+                document.getElementById('joke').innerText = '按下按钮听一个笑话！';
+                document.querySelector('button').innerText = '获取笑话';
+                language = 'zh';
+            } else {
+                document.getElementById('title').innerText = 'Welcome to the AI Joke Teller!';
+                document.getElementById('joke').innerText = 'Press the button to hear a joke!';
+                document.querySelector('button').innerText = 'Get a Joke';
+                language = 'en';
+            }
+        }
+
+        // Tell a random joke based on language
+        async function tellJoke() {
+            const jokes = language === 'en' ? [
+                "Why don't scientists trust atoms? Because they make up everything!",
+                "Why did the scarecrow win an award? Because he was outstanding in his field!",
+                "Why do cows have hooves instead of feet? Because they lactose!",
+                "Why can't you hear a pterodactyl go to the bathroom? Because the 'P' is silent!",
+                "What do you call fake spaghetti? An impasta!",
+                "Why was the math book sad? It had too many problems.",
+                "Why did the golfer bring two pairs of pants? In case he got a hole in one!",
+                "Why do seagulls fly over the ocean? Because if they flew over the bay, they’d be bagels!",
+                "What do you call cheese that isn't yours? Nacho cheese!",
+                "Why did the bicycle fall over? Because it was two-tired!",
+                "What do you call a factory that makes okay products? A satisfactory.",
+                "Why couldn't the leopard play hide and seek? Because he was always spotted.",
+                "Why did the mushroom go to the party? Because he was a fungi!",
+                "Why did the tomato blush? Because it saw the salad dressing!",
+                "What do you get when you cross a snowman and a vampire? Frostbite!",
+                "Why can't your nose be 12 inches long? Because then it would be a foot!",
+                "Why was the broom late? It swept too much.",
+                "Why are elevator jokes so classic? They work on many levels.",
+                "What did one wall say to the other? I'll meet you at the corner!",
+                "Why did the computer go to therapy? It had a hard drive!"
+            ] : [
+                "科学家为什么不信任原子？因为它们会捏造一切！",
+                "为什么稻草人得了奖？因为他在田地里表现出色！",
+                "牛为什么有蹄子而不是脚？因为它们乳糖不耐受！",
+                "为什么你听不到翼龙上厕所？因为 'P' 是无声的！",
+                "你怎么称呼假意大利面？冒牌意面！",
+                "为什么数学书很伤心？因为它有太多问题。",
+                "为什么高尔夫球手带了两条裤子？以防他打了个洞！",
+                "海鸥为什么飞过大海？因为如果它们飞过海湾，就会变成贝果！",
+                "什么样的奶酪不是你的？不是你的奶酪！",
+                "为什么自行车倒了？因为它太累了！",
+                "你怎么称呼生产普通产品的工厂？普通工厂。",
+                "为什么豹不能玩捉迷藏？因为它总是被发现。",
+                "蘑菇为什么去参加聚会？因为它是个真菌！",
+                "西红柿为什么脸红了？因为它看到沙拉在穿衣服！",
+                "当雪人和吸血鬼相遇会变成什么？冻疮！",
+                "你的鼻子为什么不能长12英寸？因为那样它会是一只脚！",
+                "扫帚为什么迟到了？它扫得太多了。",
+                "电梯笑话为什么如此经典？它们适用于多个层次！",
+                "墙壁对墙壁说了什么？我在角落见！"
+            ];
+            
+            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+            document.getElementById('joke').innerText = randomJoke;  // Display the joke
+        }
+    </script>
+</body>
+</html>
